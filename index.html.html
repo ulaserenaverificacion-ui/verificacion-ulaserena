@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificación de Certificados - Universidad de La Serena</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #333;
+      background-color: #002B49; /* Fondo general azul oscuro como se ve en la captura */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Franja Superior Azul Institucional */
+    .top-header-banner {
+      background-color: #002B49;
+      color: #ffffff;
+      padding: 10px 20px;
+    }
+    .top-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .top-header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .top-header-left img {
+      height: 55px;
+      width: auto;
+    }
+    .top-header-title {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 0;
+    }
+    /* Controles de accesibilidad superiores */
+    .top-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+    }
+    .top-header-controls span, .top-header-controls a {
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Caja lateral derecha superior (Plataforma Tecnológica Docente Integrada) */
+    .top-user-box {
+      background-color: #001F35;
+      border-left: 2px solid #004080;
+      padding: 8px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #FFD700;
+      font-size: 12px;
+    }
+    .top-user-box .user-text {
+      text-align: right;
+    }
+    .top-user-box .user-text .platform-name {
+      color: #FFD700;
+      font-weight: bold;
+      display: block;
+    }
+    .top-user-box .user-text .action-name {
+      color: #ffffff;
+      display: block;
+    }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Contenedor principal blanco con bordes redondeados tipo tarjeta */
+    .main-wrapper-card {
+      background-color: #ffffff;
+      margin: 0 15px 20px 15px;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Franja azul de la sección "Resultados de la verificación" con flecha */
+    .results-heading {
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Cuerpo interno de la tarjeta */
+    .card-content-body {
+      padding: 25px;
+      color: #333333;
+    }
+
+    /* Texto intro */
+    .intro-label {
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    /* Listado de datos limpio sin tabla formal, idéntico a la captura */
+    .data-row {
+      display: flex;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .data-key {
+      font-weight: bold;
+      width: 220px;
+      color: #000;
+    }
+    .data-sep {
+      width: 20px;
+      font-weight: bold;
+    }
+    .data-val {
+      flex: 1;
+      color: #222;
+    }
+
+    /* Texto reglamentario inferior */
+    .legal-text {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+    }
+    .legal-text p {
+      margin-bottom: 12px;
+    }
+
+    /* Pie de página azul oscuro institucional */
+    .footer-section {
+      background-color: #001A2C;
+      color: #ffffff;
+      padding: 25px 15px;
+      text-align: center;
+      border-top: 2px solid #003366;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-logo-left img {
+      max-height: 65px;
+    }
+    .footer-contacts {
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.2);
+      padding: 0 40px;
+    }
+    .footer-contacts h4 {
+      color: #FFD700;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+    .footer-contacts a {
+      background-color: #e0e0e0;
+      color: #333;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 8px;
+      border-radius: 2px;
+    }
+    .footer-contacts p {
+      font-size: 12px;
+      margin: 2px 0;
+      color: #ccc;
+    }
+    .footer-accreditation img {
+      max-height: 55px;
+    }
+    .session-timeout {
+      text-align: right;
+      color: #ffffff;
+      font-size: 12px;
+      padding: 8px 20px;
+      background-color: #001522;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Franja Superior Completa -->
+  <div class="top-header-banner">
+    <div class="top-header-content">
+      <div class="top-header-left">
+        <img src="https://phoenix.cic.userena.cl/medios/images/ulslogo.png" alt="Logo ULS">
+        <span class="top-header-title">Verificación de Certificados</span>
+      </div>
+      
+      <div class="top-header-controls">
+        <span>A-</span>
+        <span>A</span>
+        <span>A+</span>
+        <span title="Puntero">👆</span>
+        <span title="Alto Contraste">👁️</span>
+        <span title="Daltonismo">◐</span>
+        <span>🇺🇸 EN</span>
+        
+        <!-- Bloque derecho plataforma -->
+        <div class="top-user-box">
+          <div class="user-text">
+            <span class="platform-name">Plataforma Tecnológica Docente Integrada</span>
+            <span class="action-name">Verificación de Certificados</span>
+          </div>
+          <div class="user-avatar">
+            👤
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor Principal Estilo Tarjeta Blanca -->
+  <div class="main-wrapper-card">
+    <div class="results-heading">
+      <span>Resultados de la verificación</span>
+      <span>▼</span>
+    </div>
+    
+    <div class="card-content-body">
+      <div class="intro-label">La Universidad de La Serena indica :</div>
+
+      <div class="data-row">
+        <div class="data-key">Nombre del certificado</div>
+        <div class="data-sep">:</div>
+        <div class="data-val">Certificado de Estudiante Regular</div>
+      </div>
+
+      <div class="data-row">
+        <div class="data-key">Fecha de Emisión</div>
+        <div class="data-sep">:</div>
+        <div class="data-val">19 de agosto de 2026</div>
+      </div>
+
+      <div class="data-row">
+        <div class="data-key">Nombre</div>
+        <div class="data-sep">:</div>
+        <div class="data-val">Jazmín Yamileth Salinas Muñoz</div>
+      </div>
+
+      <div class="data-row">
+        <div class="data-key">R.U.N.</div>
+        <div class="data-sep">:</div>
+        <div class="data-val">21.524.105-k</div>
+      </div>
+
+      <div class="data-row">
+        <div class="data-key">Información que certifica</div>
+        <div class="data-sep">:</div>
+        <div class="data-val">La persona individualizada es estudiante regular del nivel 4 de la carrera Auditoría, código 2561</div>
+      </div>
+
+      <div class="legal-text">
+        <p>La Universidad de La Serena emite el presente Certificado de conformidad a su Reglamento de Régimen de Estudio aprobado por Resolución Exenta N°028/2010 que establece las condiciones para detentar la calidad de Estudiante Regular.</p>
+        <p>Se recomienda a terceros la revisión periódica de la validez del presente certificado por medio del Código QR inserto.</p>
+        <p>La Presentación de este Certificado para la obtención de beneficios en su institución es de exclusiva responsabilidad del estudiante y/o sus representantes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página Institucional -->
+  <div class="session-timeout">
+    Le quedan 22 minuto(s) para que su sesión termine...
+  </div>
+  <div class="footer-section">
+    <div class="footer-container">
+      <div class="footer-logo-left">
+        <img src="https://phoenix.cic.userena.cl/medios/images/logo_uls_chile.png" alt="Logo ULS Chile">
+      </div>
+      
+      <div class="footer-contacts">
+        <h4>CONTACTOS <span style="font-weight: normal; font-size: 11px;">POR UNIDADES</span></h4>
+        <a href="http://www.userena.cl/contactos-uls.html" target="_blank">VER AQUÍ</a>
+        <p>Benavente 980 - La Serena - Chile</p>
+        <p>51 2 204000</p>
+        <p style="font-size: 10px; color: #888; margin-top: 5px;">© Todos los derechos reservados</p>
+      </div>
+
+      <div class="footer-accreditation">
+        <img src="https://phoenix.cic.userena.cl/medios/images/logo_uls_acreditacion_2025.png" alt="Universidad Acreditada Nivel Avanzado">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
